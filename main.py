@@ -27,8 +27,8 @@ import os
 
 class func:
     def init(self):
-        pass
-
+        path = os.getcwd()
+        
     def colors(self):
         curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK) # folder color
         curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK) # basic file color
@@ -38,8 +38,6 @@ class func:
         GREEN = curses.color_pair(3)
 
 
-
-
     def refresh(self, stdscr):
         stdscr.clear()
         stdscr.addstr("Press any key to continue...")
@@ -47,7 +45,12 @@ class func:
         stdscr.getkey()
 
     def main(self, stdscr):
-        colors(self)
-        refresh(self, stdscr)
+        self.colors()
+        self.refresh(stdscr)
 
-wrapper(main)
+    def running(self):
+        wrapper(self.main)
+
+if __name__ == "__main__":
+    system = func()
+    system.running()
