@@ -25,6 +25,7 @@ import curses
 from curses import wrapper
 import os
 
+
 def colors():
     curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK) # folder color
     curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK) # basic file color
@@ -33,7 +34,14 @@ def colors():
     WHITE = curses.color_pair(2)
     GREEN = curses.color_pair(3)
 
+def refresh(stdscr):
+    stdscr.clear()
+    stdscr.addstr("Press any key to continue...")
+    stdscr.refresh()
+    stdscr.getkey()
+
 def main(stdscr):
-    pass
+    colors()
+    refresh(stdscr)
 
 wrapper(main)
