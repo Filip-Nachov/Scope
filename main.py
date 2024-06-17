@@ -26,17 +26,26 @@ from curses import wrapper
 import os
 
 class func:
-    def init(self):
-        path = os.getcwd()
+    def __init__(self):
+        self.path = os.getcwd()
         
     def colors(self):
         curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK) # folder color
         curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK) # basic file color
         curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK) # executable file color
-        CYAN = curses.color_pair(1)
-        WHITE = curses.color_pair(2)
-        GREEN = curses.color_pair(3)
+        self.CYAN = curses.color_pair(1)
+        self.WHITE = curses.color_pair(2)
+        self.GREEN = curses.color_pair(3)
 
+
+    def show(self, stdscr):
+        files = os.listdir(self.path)
+        show_win = curses.newwin(30, 40, 0, 0)
+        show_win.border(0, 0)
+        for i in files:
+            show_win.addstr(f"{i}\n", self.WHITE)
+        show_win.getkey()
+        
 
     def refresh(self, stdscr):
         stdscr.clear()
@@ -47,10 +56,14 @@ class func:
     def main(self, stdscr):
         self.colors()
         self.refresh(stdscr)
+        stdscr.clear()
+        self.show(stdscr)
+        stdscr.refresh()
 
     def running(self):
         wrapper(self.main)
 
 if __name__ == "__main__":
     system = func()
-    system.running()
+    system.running()       
+    
