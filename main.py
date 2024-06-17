@@ -39,19 +39,32 @@ class func:
 
 
     def show(self, stdscr):
+        # start functions
+        stdscr.clear()
         files = os.listdir(self.path)
-        show_win = curses.newwin(30, 40, 0, 0)
-        show_win.border(0, 0)
-        for i in files:
-            show_win.addstr(f"{i}\n", self.WHITE)
+
+        # dimensions for the window
+        height = len(files) + 2
+        width = 40
+        start_y = 1
+        start_x = 1 
+        
+        # creating the window and border 
+        show_win = curses.newwin(height, width, start_y, start_x)
+        show_win.border(0)
+
+        # showing process
+        for idx, filename in enumerate(files):
+            show_win.addstr(idx + 1, 2, filename, self.WHITE)
+
+        # end commands
+        show_win.refresh()
         show_win.getkey()
         
 
     def refresh(self, stdscr):
         stdscr.clear()
-        stdscr.addstr("Press any key to continue...")
         stdscr.refresh()
-        stdscr.getkey()
 
     def main(self, stdscr):
         self.colors()
