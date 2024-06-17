@@ -25,23 +25,29 @@ import curses
 from curses import wrapper
 import os
 
+class func:
+    def init(self):
+        pass
 
-def colors():
-    curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK) # folder color
-    curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK) # basic file color
-    curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK) # executable file color
-    CYAN = curses.color_pair(1)
-    WHITE = curses.color_pair(2)
-    GREEN = curses.color_pair(3)
+    def colors(self):
+        curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK) # folder color
+        curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK) # basic file color
+        curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK) # executable file color
+        CYAN = curses.color_pair(1)
+        WHITE = curses.color_pair(2)
+        GREEN = curses.color_pair(3)
 
-def refresh(stdscr):
-    stdscr.clear()
-    stdscr.addstr("Press any key to continue...")
-    stdscr.refresh()
-    stdscr.getkey()
 
-def main(stdscr):
-    colors()
-    refresh(stdscr)
+
+
+    def refresh(self, stdscr):
+        stdscr.clear()
+        stdscr.addstr("Press any key to continue...")
+        stdscr.refresh()
+        stdscr.getkey()
+
+    def main(self, stdscr):
+        colors(self)
+        refresh(self, stdscr)
 
 wrapper(main)
