@@ -38,6 +38,7 @@ class func:
         self.GREEN = curses.color_pair(3)
 
 
+
     def show(self, stdscr):
         # start functions
         stdscr.clear()
@@ -52,10 +53,11 @@ class func:
         # creating the window and border 
         show_win = curses.newwin(height, width, start_y, start_x)
         show_win.border(0)
-
+    
+        show_win.bkgd(' ', curses.COLOR_BLACK)
         # showing process
         for idx, filename in enumerate(files):
-            show_win.addstr(idx + 1, 2, filename, self.WHITE)
+            show_win.addstr(idx + 1, 2, filename)
 
         # end commands
         show_win.refresh()
