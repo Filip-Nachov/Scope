@@ -51,17 +51,18 @@ class func:
         start_x = 1 
         
         # creating the window and border 
-        show_win = curses.newwin(height, width, start_y, start_x)
-        show_win.border(0)
+        self.show_win = curses.newwin(height, width, start_y, start_x)
+        self.show_win.border(0)
     
-        show_win.bkgd(' ', curses.COLOR_BLACK)
+        self.show_win.bkgd(' ', curses.COLOR_BLACK)
         # showing process
         for idx, filename in enumerate(files):
-            show_win.addstr(idx + 1, 2, filename)
+            self.show_win.addstr(idx + 1, 2, filename)
+        
 
         # end commands
-        show_win.refresh()
-        show_win.getkey()
+        self.show_win.refresh()
+        self.show_win.getkey()
         
 
     def refresh(self, stdscr):
