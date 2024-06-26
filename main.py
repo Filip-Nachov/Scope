@@ -24,6 +24,7 @@ SOFTWARE.
 import curses
 from curses import wrapper
 import os
+import movement as mv
 
 class func:
     def __init__(self):
@@ -58,8 +59,10 @@ class func:
         # showing process
         for idx, filename in enumerate(files):
             self.show_win.addstr(idx + 1, 2, filename)
-        
-
+       
+        # catching movement
+        mv.getmv(self)
+    
         # end commands
         self.show_win.refresh()
         self.show_win.getkey()
