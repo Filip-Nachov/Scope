@@ -61,11 +61,10 @@ class func:
             self.show_win.addstr(idx + 1, 2, filename)
        
         # catching movement
-        mv.getmv(self)
+        mv.getmv(self.show_win)
     
         # end commands
         self.show_win.refresh()
-        self.show_win.getkey()
         
 
     def refresh(self, stdscr):
