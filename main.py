@@ -72,6 +72,9 @@ class func:
         stdscr.refresh()
 
     def main(self, stdscr):
+        # hide cursor
+        curses.curs_set(0)
+
         self.colors()
         self.refresh(stdscr)
         stdscr.clear()

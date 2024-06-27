@@ -21,12 +21,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
-import curses 
+import curses
+import os
+
+path = os.getcwd()
 
 def getmv(win):
+    selected_index = 0
+    file_list = os.listdir(path)
     while True:
         key = win.getkey()
         if key == "q":
             break
-        else:
-            print("you pressed a key")
+        if key == "w":
+            pass 
