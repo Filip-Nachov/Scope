@@ -26,6 +26,8 @@ from curses import wrapper
 import os
 import movement as mv
 
+cr = 0
+
 class func:
     def __init__(self):
         self.path = os.getcwd()
@@ -40,32 +42,41 @@ class func:
 
 
 
-    def show(self, stdscr):
-        # start functions
+    def show(self, stdscr, cr):
         stdscr.clear()
-        files = os.listdir(self.path)
-
-        # dimensions for the window
-        height = len(files) + 2
+        
+        # Get list of files in the current directory
+        self.files = os.listdir(self.path)
+        
+        # Dimensions for the window
+        height = len(self.files) + 2  # Adjusted height to fit files + border
         width = 40
         start_y = 1
         start_x = 1 
         
-        # creating the window and border 
+        # Ensure the window fits within screen boundaries
+        max_y, max_x = stdscr.getmaxyx()
+        if start_y + height > max_y or start_x + width > max_x:
+            stdscr.addstr(0, 0, "Window too large for screen")
+            stdscr.refresh()
+            return
+        
+        # Create the window and draw border
         self.show_win = curses.newwin(height, width, start_y, start_x)
         self.show_win.border(0)
-    
-        self.show_win.bkgd(' ', curses.COLOR_BLACK)
-        # showing process
-        for idx, filename in enumerate(files):
-            self.show_win.addstr(idx + 1, 2, filename)
-       
-        # catching movement
-        mv.getmv(self.show_win)
-    
-        # end commands
-        self.show_win.refresh()
         
+        while True:
+            # Display files in the window
+            for idx, file_name in enumerate(self.files):
+                if idx == cr:
+                    self.show_win.addstr(idx + 1, 1, file_name, curses.A_REVERSE)
+                else:
+                    self.show_win.addstr(idx + 1, 1, file_name)
+        
+            mv.getmv(self.show_win, cr, self.files)    
+
+            # Refresh the window to display changes
+            self.show_win.refresh() 
 
     def refresh(self, stdscr):
         stdscr.clear()
@@ -78,7 +89,7 @@ class func:
         self.colors()
         self.refresh(stdscr)
         stdscr.clear()
-        self.show(stdscr)
+        self.show(stdscr, cr)
         stdscr.refresh()
 
     def running(self):

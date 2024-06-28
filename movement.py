@@ -26,12 +26,13 @@ import os
 
 path = os.getcwd()
 
-def getmv(win):
-    selected_index = 0
+def getmv(win, row, file):
     file_list = os.listdir(path)
     while True:
         key = win.getkey()
         if key == "q":
-            break
-        if key == "w":
-            pass 
+            quit
+        elif key == "w":
+            row = max(0, row - 1)
+        elif key == 's': 
+            row = min(len(file) - 1, row + 1)
