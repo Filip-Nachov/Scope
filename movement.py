@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
 import curses
+import sys
 import os
 
 path = os.getcwd()
@@ -31,7 +32,7 @@ def getmv(win, row, file):
     while True:
         key = win.getkey()
         if key == "q":
-            quit
+            sys.exit()
         elif key == "w":
             row = max(0, row - 1)
         elif key == 's': 
