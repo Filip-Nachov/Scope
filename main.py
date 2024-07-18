@@ -74,6 +74,8 @@ class func:
                     self.show_win.addstr(idx + 1, 1, file_name)
         
             mv.getmv(self.show_win, cr, self.files)    
+            
+            print(cr)
 
             # Refresh the window to display changes
             self.show_win.refresh() 
